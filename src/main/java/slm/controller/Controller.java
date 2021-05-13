@@ -13,4 +13,12 @@ public class Controller {
         return Website.getHTML();
     }
 
+    @GET
+    @Path("/reload")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String reload() {
+        String output = Website.getJSON();
+        return output;
+    }
+
 }

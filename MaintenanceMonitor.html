@@ -31,6 +31,35 @@
         </div>
     </div>
 
+    <script>
+/*
+https://www.w3schools.com/howto/howto_js_redirect_webpage.asp
+https://www.w3schools.com/js/js_timing.asp
+https://wiki.selfhtml.org/wiki/JavaScript/XMLHttpRequest
+*/
+
+    var timer = setInterval(reloadFunction, 5000);
+
+    function reloadFunction(){
+       var request = new XMLHttpRequest();
+       request.addEventListener('load', function(event) {
+          if (request.status >= 200 && request.status < 300) {
+             var json = JSON.parse(request.responseText);
+             var container = document.getElementById("container");
+             container.setAttribute("style", json.style);
+             var message = document.getElementById("message");
+             message.innerHTML=json.message;
+             var updated = document.getElementById("updated");
+             updated.innerHTML="last update: "+json.time;
+          } else {
+             console.warn(request.statusText, request.responseText);
+          }
+       });
+       request.open("GET","http://localhost:8080/api/maintenance_monitor/reload");
+       request.send();
+    }
+    </script>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
