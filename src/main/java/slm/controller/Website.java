@@ -3,6 +3,8 @@ package slm.controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Website {
 
@@ -23,6 +25,18 @@ public class Website {
 
     public static String getStyle() {
         return style;
+    }
+
+    private static String getTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        Date date = new Date();
+        return formatter.format(date);
+    }
+
+    public static String getJSON() {
+        return "{\"message\": \""+getMessage()+"\", "+
+                "\"style\": \""+getStyle()+"\", "+
+                "\"time\": \""+getTime()+"\"}";
     }
 
     //https://stackoverflow.com/questions/12035316/reading-entire-html-file-to-string
